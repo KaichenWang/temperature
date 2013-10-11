@@ -18,8 +18,16 @@ public class TemperatureTest {
 	private Temperature.Units resultUnit;
 
 	final double VALUE_PRECISION = 0.0001;
+	
+	/*
+	 * In the following test cases,
+	 * negative, positive, boundary (zero), and decimal values are used,
+	 * because they cover a wide range of possible temperature values
+	 */
 
-	// Tests for getValue
+	/* ---------------
+	Tests for getValue
+	--------------- */
 
 	@Test
 	public void testGetValueInCelsius () {
@@ -90,7 +98,7 @@ public class TemperatureTest {
 	@Test
 	public void testGetValueNegativeDecimal () {
 		// uses an arbitrary temperature unit
-		// tests if a decimal value is properly stored
+		// tests if a negative decimal value is properly stored
 		testValue = -0.4567;
 		testUnit = Temperature.Units.CELSIUS;
 		temperature = new Temperature (testValue, testUnit);
@@ -98,12 +106,13 @@ public class TemperatureTest {
 		assertEquals (testValue, resultValue, VALUE_PRECISION);
 	}
 
-
-	// Tests for getUnits
+	/* ---------------
+	Tests for getUnits
+	--------------- */
 
 	@Test
 	public void testGetUnitsCelsius () {
-		// uses an arbitrary temperature value
+		// uses an arbitrary positive temperature value
 		// tests if Celsius as units is properly stored
 		testValue = 300;
 		testUnit = Temperature.Units.CELSIUS;
@@ -114,7 +123,7 @@ public class TemperatureTest {
 
 	@Test
 	public void testGetUnitsFahrenheit () {
-		// uses an arbitrary temperature value
+		// uses an arbitrary positive temperature value
 		// tests if Fahrenheit as units is properly stored
 		testValue = 300;
 		testUnit = Temperature.Units.FAHRENHEIT;
@@ -125,7 +134,7 @@ public class TemperatureTest {
 
 	@Test
 	public void testGetUnitsKelvin () {
-		// uses an arbitrary temperature value
+		// uses an arbitrary positive temperature value
 		// tests if Kelvin as units is properly stored
 		testValue = 300;
 		testUnit = Temperature.Units.KELVIN;
@@ -133,13 +142,49 @@ public class TemperatureTest {
 		resultUnit = temperature.getUnits();
 		assertEquals (testUnit, resultUnit);
 	}
+	
+	@Test
+	public void testGetUnitsCelsiusNegative () {
+		// uses an arbitrary negative temperature value
+		// tests if Celsius as units is properly stored
+		testValue = -300;
+		testUnit = Temperature.Units.CELSIUS;
+		temperature = new Temperature (testValue, testUnit);
+		resultUnit = temperature.getUnits();
+		assertEquals (testUnit, resultUnit);
+	}
 
-	// Tests for changeUnits (Celsius to Fahrenheit)
+	@Test
+	public void testGetUnitsFahrenheitNegative () {
+		// uses an arbitrary negative temperature value
+		// tests if Fahrenheit as units is properly stored
+		testValue = -300;
+		testUnit = Temperature.Units.FAHRENHEIT;
+		temperature = new Temperature (testValue, testUnit);
+		resultUnit = temperature.getUnits();
+		assertEquals (testUnit, resultUnit);
+	}
+
+	@Test
+	public void testGetUnitsKelvinNegative () {
+		// uses an arbitrary negative temperature value
+		// tests if Kelvin as units is properly stored
+		testValue = -300;
+		testUnit = Temperature.Units.KELVIN;
+		temperature = new Temperature (testValue, testUnit);
+		resultUnit = temperature.getUnits();
+		assertEquals (testUnit, resultUnit);
+	}
+	
+	/* --------------------
+	Tests for changeUnits
+	(Celsius to Fahrenheit)
+	-------------------- */
 
 	@Test
 	public void testChangeUnitsCeliusToFahrenheitPositive () {
 		// uses positive celsius temperature value
-		// tests conversion of celsius to Fahrenheit
+		// tests conversion of celsius to fahrenheit
 		testValue = 300;
 		testUnit = Temperature.Units.CELSIUS;
 		conversionTestUnit = Temperature.Units.FAHRENHEIT;
@@ -153,7 +198,7 @@ public class TemperatureTest {
 	@Test
 	public void testChangeUnitsCeliusToFahrenheitNegative () {
 		// uses negative celsius temperature value
-		// tests conversion of celsius to Fahrenheit
+		// tests conversion of celsius to fahrenheit
 		testValue = -300;
 		testUnit = Temperature.Units.CELSIUS;
 		conversionTestUnit = Temperature.Units.FAHRENHEIT;
@@ -167,7 +212,7 @@ public class TemperatureTest {
 	@Test
 	public void testChangeUnitsCeliusToFahrenheitZero () {
 		// uses zero celsius temperature value
-		// tests conversion of celsius to Fahrenheit
+		// tests conversion of celsius to fahrenheit
 		testValue = 0;
 		testUnit = Temperature.Units.CELSIUS;
 		conversionTestUnit = Temperature.Units.FAHRENHEIT;
@@ -181,7 +226,7 @@ public class TemperatureTest {
 	@Test
 	public void testChangeUnitsCeliusToFahrenheitDecimal () {
 		// uses decimal celsius temperature value
-		// tests conversion of celsius to Fahrenheit
+		// tests conversion of celsius to fahrenheit
 		testValue = 0.4567;
 		testUnit = Temperature.Units.CELSIUS;
 		conversionTestUnit = Temperature.Units.FAHRENHEIT;
@@ -195,7 +240,7 @@ public class TemperatureTest {
 	@Test
 	public void testChangeUnitsCeliusToFahrenheitNegativeDecimal () {
 		// uses negative decimal celsius temperature value
-		// tests conversion of celsius to Fahrenheit
+		// tests conversion of celsius to fahrenheit
 		testValue = -0.4567;
 		testUnit = Temperature.Units.CELSIUS;
 		conversionTestUnit = Temperature.Units.FAHRENHEIT;
@@ -206,8 +251,11 @@ public class TemperatureTest {
 		assertEquals (expectedConvertedValue, resultValue, VALUE_PRECISION);
 	}
 
-	// Tests for changeUnits (Celsius to Kelvin)
-
+	/* ------------------
+	Tests for changeUnits
+	(Celsius to Kelvin)
+	------------------ */
+	
 	@Test
 	public void testChangeUnitsCeliusToKelvinPositive () {
 		// uses positive celsius temperature value
@@ -278,7 +326,10 @@ public class TemperatureTest {
 		assertEquals (expectedConvertedValue, resultValue, VALUE_PRECISION);
 	}
 
-	// Tests for changeUnits (Fahrenheit to Celsius)
+	/* --------------------
+	Tests for changeUnits
+	(Fahrenheit to Celsius)
+	-------------------- */
 
 	@Test
 	public void testChangeUnitsFahrenheitToCeliusPositive () {
@@ -349,8 +400,11 @@ public class TemperatureTest {
 		expectedConvertedValue = -18.0315 ;
 		assertEquals (expectedConvertedValue, resultValue, VALUE_PRECISION);
 	}
-
-	// Tests for changeUnits (Fahrenheit to Kelvin)
+	
+	/* -------------------
+	Tests for changeUnits
+	(Fahrenheit to Kelvin)
+	------------------- */
 
 	@Test
 	public void testChangeUnitsFahrenheitToKelvinPositive () {
@@ -422,7 +476,10 @@ public class TemperatureTest {
 		assertEquals (expectedConvertedValue, resultValue, VALUE_PRECISION);
 	}
 	
-	// Tests for changeUnits (Kelvin to Celsius)
+	/* ------------------
+	Tests for changeUnits
+	(Kelvin to Celsius)
+	------------------ */
 
 	@Test
 	public void testChangeUnitsKelvinToCelsiusPositive () {
@@ -493,8 +550,11 @@ public class TemperatureTest {
 		expectedConvertedValue = -273.6067;
 		assertEquals (expectedConvertedValue, resultValue, VALUE_PRECISION);
 	}
-	
-	// Tests for changeUnits (Kelvin to Fahrenheit)
+		
+	/* -------------------
+	Tests for changeUnits
+	(Kelvin to Fahrenheit)
+	------------------- */
 
 	@Test
 	public void testChangeUnitsKelvinToFahrenheitPositive () {
