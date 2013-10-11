@@ -11,14 +11,22 @@ public class TemperatureTest {
 
   // Add multiple tests to check all functions of
   // {@Code Temperature} class.
-
-  // @Test
-  // public void .... (){
-  //    ...
-  // }
-
-  // @Test
-  // public void .... (){
-  //    ...
-  // }
+  
+  @Test
+  public void testGetValue () {
+	  double desiredValue = 15;
+	  Temperature.Units desiredUnit = Temperature.Units.KELVIN;
+	  Temperature testTemperature = new Temperature (desiredValue, desiredUnit);
+	  double getvalueResult = testTemperature.getValue();
+	  assertEquals(desiredValue, getvalueResult, .1);
+  }
+  
+  @Test
+  public void testGetUnits () {
+	  double desiredValue = 15;
+	  Temperature.Units desiredUnit = Temperature.Units.KELVIN;
+	  Temperature testTemperature = new Temperature (desiredValue, desiredUnit);
+	  Temperature.Units getUnitsResult = testTemperature.getUnits();
+	  assertEquals(desiredUnit, getUnitsResult);
+  }
 }
